@@ -1,0 +1,8 @@
+small project to check internet connection outages
+
+reports either connected (1) or not connected (0)
+
+stores the timestamp of when a not connected was recorded, and for how long, (including the error message) in a SQLite file
+
+the automated version checks once or twice a minute
+the manual version has simple flood controls to prevent the database from flooding over
