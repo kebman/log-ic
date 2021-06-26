@@ -1,0 +1,33 @@
+Single Log Blueprint
+
+A step-by-step walkthrough of how a single internet outage is tested and logged, either by manual testing or by automatic repetition of the test.
+
+1. check if there's an outage (1 yes, there's an outage vs. 0 no, there's no outage)
+2. store the answer in memory (yes or no + timestamp + error if available)
+3. get last entry of db
+4. tests on last entry:
+4*. if answer is 0 (no), and last entry is None, then make the first entry in the database :D
+4a. if answer is 0 (no), and last entry is 0 (no), then do nothing
+4b. if answer is 0 (no), and last entry is 1 (yes), then make a new entry in the database
+4c. if answer is 1 (yes), and last entry is 1 (yes), then test TRESHOLD time
+4ci. if last entry timestamp is less than TRESHOLD time ago, do nothing
+4cii. if last entry timestamp is more than TRESHOLD time ago, then make a new entry in the database
+
+Explanations:
+
+THRESHOLD is subjective, based upon how many entries you'd like upon repeated. I suggest 30 seconds up to five minutes. 30 seconds gives you two stored tests a minute, which is fine-grained enough to document home downtime. Though if you're suffering long periods of outage, then using a bigger TRESHOLD interval might be advicable. This way new entries are curtailed to the threshold time. 
+
+The benefit is that you get fewer entries in the database. 
+The downside of this is that intermittent uptime might be lost in the threshold time if it's too big.
+
+This technical walktrough is engineered to store Internet Connection (IC) = true only once after an outage, since what we're looking for is IC = False, i.e. when we *don't* have an internet connection, thus preventing flood overflow or double-storage of outage entries in the database. But if the connection is lost for some time, the downtime is logged at TRESHOLD intervals.
+
+The latter is best for manual logging, where you run the Single Log script manually, testing the connection again and again at your own leisure. But in a fully automated loggin scheme, you'd only log the beginning of the outage, and the first time internet was connected again. 
+
+My goal is to make the manual script first, and then build the one that can be fully automated.
+
+Idea
+
+We could possibly skip the TRESHOLD time entirely, and simply store when internet is connected again, though if you either stop logging before the internet gets on again, or you are somehow prevented from logging more, then it would seem like the outage was extreemly long.
+
+Possibly this script can be improved by caching the last known database entry in memory.
