@@ -9,3 +9,4 @@ If an outage is detected, it stores a timestamp of when the outage was recorded,
 
 The manual version has very simple flood controls to prevent the database from flooding over. It doesn't have any socket spam controls outside a randomied list of servers to check, however, so please don't spam, or you risk being banned from those servers. I take no responsibility for your faulty or malevolent use of this code. 
 
+I may make a fully automated version sometime in the future, when the world is a greener place, and freedom is again something most people enjoy.
