@@ -1,7 +1,7 @@
 # log-ic
 Log when your internet connection is down
 
-A small project to check internet connection outages. Currently you'll have to do so manually when you detect an internet outage.
+A small project to check internet connection outages. Currently you'll have to do so manually when you detect an internet outage, born out of the agony of a very bad, choppy and intermittent internet connection with chunks of outages coming at certain congested times (usually during weekends), and my ISP always reporting back that there's nothing wrong with the connection.
 
 The program reports either connected or not connected status based upon a socket test. You either have an Internet outage, or you don't. 
 
