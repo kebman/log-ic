@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# creates the SQLite database file - run this first
 import sqlite3
 
 # create db file
