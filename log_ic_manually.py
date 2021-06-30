@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# log internet access once - using sqlite
+# log internet access once every time you manually run it - using SQLite
 from datetime import datetime
 import time 
 import sqlite3
