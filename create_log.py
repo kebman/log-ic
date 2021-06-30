@@ -2,11 +2,11 @@
 import sqlite3
 
 # create db file
-con = sqlite3.connect('./db/ic_log1_2020-06-22_manual.db')
+con = sqlite3.connect('./db/ic_log1_2020-06-30_manual.db')
 cur = con.cursor()
 
 # create table
-cur.execute('''CREATE TABLE IF NOT EXISTS iclog (date real, ic integer, error text)''')
+cur.execute('''CREATE TABLE IF NOT EXISTS iclog (date real, ic integer, note text)''')
 
 # close the connection 
 con.close()
