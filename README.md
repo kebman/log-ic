@@ -26,7 +26,7 @@ Warning: Running this script many times a second, for a prolonged period, may re
 ### Continuous Logging:
 Start up the ´log_ic_continuously.py´ in your favourite terminal or cmd program. It will timestamp each test, and if an URL name is returned from the tested, you're online. If you're offline, the script will make a log entry in the SQLite database. 
 
-To stop the script, hit either ´Ctrl+C´ or ´Ctrl+Break´ or ´Ctrl+Z´ or ´CMD+Z´ depending a bit on which terminal you're using and under which OS. 
+To stop the script, hit either `Ctrl+C` or `Ctrl+Break` or `Ctrl+Z` or `CMD+Z` depending a bit on which terminal you're using and under which OS. 
 
 ### Print Log:
 When you want to view the log, run `print_log.py`. It'll format the entries into something human readable. Then just copy it, paste it into a mail, and send to your ISP with a demand for a refund. :D
