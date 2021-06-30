@@ -3,7 +3,7 @@ Log when your internet connection is down
 
 A small project to check internet connection outages, born out of the agony of a very bad, choppy and intermittent internet connection with chunks of outages coming at certain congested times (usually during weekends), and my ISP always reporting back that there's nothing wrong with the connection.
 
-The program reports either a connected or not connected status based upon a socket test. You either have an Internet outage, or you don't. 
+The program reports either a connected or not connected status based upon a socket test with active polling of a DNS from a list of choice servers. You either have an Internet outage, or you don't. 
 
 If an outage is detected, it stores a timestamp of when the outage was recorded, and for how long—including the server note or error message—in an SQLite file. If you continue to test, it will store a new entry every ~30 seconds until your internet connection is restored again.
 
