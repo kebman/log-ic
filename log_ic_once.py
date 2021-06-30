@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 # log internet access once - using sqlite
-import urllib.request # not needed
-from datetime import datetime # not needed
 import time 
 import sqlite3
 import socket
@@ -40,16 +38,26 @@ print("Testing server", random_pick)
 
 def is_connected():
 	ic = dict()
+
+	s = socket.socket()
+	s.settimeout(0.03)
+
 	try:
-		socket.create_connection((random_pick, 53))
+		# cnx to dns server on a random port above 1023 for tcp
+		s.connect((random_pick, 33061))
+
 		ic['ts'] = time.time()
 		ic['outage'] = 0
 		return ic
+
 	except OSError as err:
 		ic['ts'] = time.time()
 		ic['outage'] = 1
 		ic['err'] = err
 		return ic
+	
+	finally:
+		s.close()
 
 # 2. store the answer in memory (yes or no + timestamp + error if available)
 test = is_connected()
