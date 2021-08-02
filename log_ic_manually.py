@@ -8,7 +8,7 @@ import sys
 import http.client as httplib
 
 # database connection
-con = sqlite3.connect('./db/ic_log1_2020-08-01_manual.db')
+con = sqlite3.connect('./db/ic_log1_2020-06-30_manual.db')
 cur = con.cursor()
 
 # standard dns port
@@ -45,13 +45,13 @@ def check_treshold(ts, treshold_time):
 
 		return False
 
-def ic(inthere):
+def ic(note, state):
 
 	ic = dict()
 
 	ic['ts'] = time.time()
-	ic['outage'] = 0
-	ic['note'] = str(inthere)
+	ic['outage'] = state
+	ic['note'] = str(note)
 	
 	return ic
 
@@ -73,13 +73,13 @@ def head(server):
 		c.request("HEAD", "/")
 		sys.stdout.write("Online \n")
 
-		return ic(server)
+		return ic(server, 0)
 
 	except Exception as err:
 
 		sys.stdout.write("Offline: " + str(err) + "\n")
 
-		return ic(str(err))
+		return ic(str(err), 1)
 
 	finally:
 
