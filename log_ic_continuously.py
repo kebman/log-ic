@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# log internet access continuously every so and so many seconds - using SQLite 
+# log internet accessessibility continuously - using SQLite 
 from datetime import datetime
 import time 
 import sqlite3
@@ -10,7 +10,6 @@ import http.client as httplib
 # ready repeater
 starttime = time.time()
 seconds = 14.995
-
 
 while True:
 
@@ -43,10 +42,10 @@ while True:
 		else:
 			return False
 
-	def ic(note):
+	def ic(note, outage):
 		ic = dict()
 		ic['ts'] = time.time()
-		ic['outage'] = 0
+		ic['outage'] = outage
 		ic['note'] = note
 		return ic
 
@@ -66,12 +65,12 @@ while True:
 		try:
 			c.request("HEAD", "/")
 			sys.stdout.write(" Online \n")
-			return ic(server)
+			return ic(server, 0)
 
 		# except httplib.HTTPException as err:
 		except Exception as err:
-			sys.stdout.write(" " + str(err) + "\n")
-			return ic(str(err))
+			sys.stdout.write(" " + str(err) + "\n") # timed out
+			return ic(str(err), 1) 
 
 		finally:
 			c.close()
@@ -121,10 +120,6 @@ while True:
 				print("Run SQL: Still internet outage...")
 				log_to_db(test['ts'], test['outage'], test['note'])
 			# Otherwise do nothing.
-
-	# make timestame human readable
-	def ts_to_txt(ts):
-		return datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
 	# wait a little until loop restarts
 	time.sleep(seconds - ((time.time() - starttime) % seconds))
