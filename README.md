@@ -13,6 +13,10 @@ A fully automated version is also available, that tests your internet connection
 
 ## How to use
 
+First of all, you need [Python 3](https://www.python.org/downloads/ "Download Python 3") installed to run these scripts. Once you have installed Python 3, you can open a terminal or command prompt, navigate to the folder of the script, and type something along the lines of `python name_of_script.py` in order to run the script in question. On some systems, you'll have to write `python3` instead of just `python`, depending on the architecture and if there are more than one version of Pythnon present. 
+
+Note: You may have to edit small sections of the scripts yourself before use, such as changing file paths or file names. Let the comments guide you!
+
 ### First Run:
 Run `create_log_db.py` once to create the database file. (You may have to create the folder for it too.)
 
@@ -22,7 +26,7 @@ Note: It will only make a new log every ~30 seconds, but you can change this tre
 Warning: Running this script many times a second, for a prolonged period, may result in you getting banned from the servers it is pinging for attempted DDOS.
 
 ### Continuous Logging:
-Start up the ´log_ic_continuously.py´ in your favourite terminal or cmd program. It will timestamp each test, and if an URL name is returned from the tested, you're online. If you're offline, the script will make a log entry in the SQLite database. 
+Start up the `log_ic_continuously.py` in your favourite terminal or cmd program. It will timestamp each test, and if an URL name is returned from the tested, you're online. If you're offline, the script will make a log entry in the SQLite database. 
 
 To stop the script, hit either `Ctrl+C` or `Ctrl+Break` or `Ctrl+Z` or `CMD+Z` depending a bit on which terminal you're using and under which OS. 
 
