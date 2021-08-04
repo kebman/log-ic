@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# log internet accessessibility continuously - using SQLite 
+# log internet accessessibility continually - using SQLite 
 from datetime import datetime
 import time 
 import sqlite3
@@ -91,7 +91,7 @@ while True:
 		# if there's no records already...
 		if (db_result == None):
 			# ...then record the 1st one
-			print("run 1st SQL")
+			print("Run 1st SQL")
 			log_to_db(test['ts'], test['outage'], test['note'])
 
 		# if there's a change since last record...
