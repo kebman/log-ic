@@ -1,34 +1,61 @@
 # log-ic
-Log when your internet connection is down
 
-A small project to check internet connection outages, born out of the agony of a very bad, choppy and intermittent internet connection with chunks of outages coming at certain congested times (usually during weekends), and my ISP always reporting back that there's nothing wrong with the connection.
+Keep tabs on your internet outages (and give your ISP a hard time!)
 
-The program reports either a connected or not connected status based upon a socket test with active polling of a DNS from a list of choice servers. You either have an Internet outage, or you don't. 
+## Overview
 
-If an outage is detected, it stores a timestamp of when the outage was recorded, and for how long—including the server note or error message—in an SQLite file. If you continue to test, it will store a new entry every ~30 seconds until your internet connection is restored again.
+Ever been frustrated by a choppy, unreliable internet connection, especially during the weekends? This small project was born out of that same agony. With your ISP always insisting that there's "nothing wrong," **log-ic** helps you track exactly when your internet decides to take a nap and for how long.
 
-Note that all testing is currently done by actively polling a server. The manual version has only very basic flood controls to prevent the database file from becomming overfilled. The script doesn't have any socket flood controls outside a randomized list of servers to check, however, so please don't spam, or you risk being banned from those servers. I take no responsibility for your faulty or malevolent use of this code! I'm also looking for a way to test the connection passively.
+**log-ic** works by performing regular socket tests, pinging a list of DNS servers to check if you're online or not. If it finds your internet is down, it'll log the outage, including a timestamp and any relevant error messages, into a neat little SQLite database file. When your connection comes back, it'll log that too!
 
-A fully automated version is also available, that tests your internet connection a couple of times a minute.
+### Fair warning
 
-## How to use
+This script actively pings servers, so if you overdo it, you might accidentally annoy the servers you're testing against—possibly getting yourself temporarily banned. Use responsibly!
 
-First of all, you need [Python 3](https://www.python.org/downloads/ "Download Python 3") installed to run these scripts. Once you have installed Python 3, you can open a terminal or command prompt, navigate to the folder of the script, and type something along the lines of `python name_of_script.py` in order to run the script in question. On some systems, you'll have to write `python3` instead of just `python`, depending on the architecture and if there are more than one version of Pythnon present. 
+## Features
 
-Note: You may have to edit small sections of the scripts yourself before use, such as changing file paths or file names. Let the comments guide you!
+- **Manual Outage Logging:** Quickly log an outage when you notice your connection is down.
+- **Continuous Monitoring:** Automatically test and log your connection status every ~30 seconds.
+- **Readable Logs:** Easily view and format your logs to share with your ISP when you demand that sweet refund.
 
-### First Run:
-Run `create_log_db.py` once to create the database file. (You may have to create the folder for it too.)
+## Usage
 
-### Testing Your Connection:
-When you suspect an internet connection problem or outage, quickly run `log_ic_manually.py` before internet gets back on again. Keep running it until you're connected to the internet again. It should make the first database entry on the first run, and then log outages when they occurr. 
-Note: It will only make a new log every ~30 seconds, but you can change this treshold to your liking in the script.
-Warning: Running this script many times a second, for a prolonged period, may result in you getting banned from the servers it is pinging for attempted DDOS.
+### Prerequisites
 
-### Continuous Logging:
-Start up the `log_ic_continuously.py` in your favourite terminal or cmd program. It will timestamp each test, and if an URL name is returned from the tested, you're online. If you're offline, the script will make a log entry in the SQLite database. 
+- You'll need [Python 3](https://www.python.org/downloads/ "Download Python 3") to run these scripts. If you don't have it installed yet, go grab it!
 
-To stop the script, hit either `Ctrl+C` or `Ctrl+Break` or `Ctrl+Z` or `CMD+Z` depending a bit on which terminal you're using and under which OS. 
+### First Run
 
-### Print Log:
-When you want to view the log, run `print_log.py`. It'll format the entries into something human readable. Then just copy it, paste it into a mail, and send to your ISP with a demand for a refund. :D
+1. Open your terminal or command prompt.
+2. Navigate to the script folder.
+3. Run `create_log_db.py` to set up your database (you might need to create the folder first).
+
+### Checking Your Connection Manually
+
+When you suspect that your internet connection is doing its disappearing act:
+
+1. Run `log_ic_manually.py` immediately (before your connection reappears like nothing happened).
+2. Keep the script running until you're back online.
+3. The script logs an outage every ~30 seconds—feel free to adjust this interval in the code if you want.
+
+#### Note:
+
+Don't run this script too often in a short period, or you might be seen as a threat by the servers you're pinging. No one wants a DDOS ban!
+
+### Continuous Monitoring (Set It and Forget It)
+
+1. Start `log_ic_continuously.py` in your terminal.
+2. The script will check your connection status at regular intervals and log any outages.
+3. To stop it, use `Ctrl+C`, `Ctrl+Break`, or `CMD+Z`, depending on your OS and terminal.
+
+### Viewing Your Log
+
+Need evidence to wave in your ISP's face? Run `print_log.py` to format and view your logs in a human-readable way. Copy, paste, and hit send!
+
+## Project Participation
+
+Think you can make this project even better? Want to join the battle against dodgy ISPs? We'd love to have you on board! Feel free to fork the code, submit pull requests, or suggest new features and improvements. Whether you're fixing bugs, adding cool new functionalities, or just adding your own twist to the project, your contributions are welcome. Together, we can give ISPs everywhere a run for their money!
+
+## A Note on Customization
+
+These scripts are provided as-is under the MIT license, meaning you can use, modify, and distribute them as you like. However, to get them working just right for you, you may need to dive into the code and tweak things like database files, file paths, server lists, and timing intervals. Don’t worry—comments are sprinkled throughout the code to guide you!
